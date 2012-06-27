@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Monkey Machine</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.simplemodal-1.4.2.js"></script>
+<script type="text/javascript" src="ui.js"></script>
+<script type="text/javascript">
+
+</script>
+<link rel="stylesheet" type="text/css" href="mm.css">
+</head>
+<body>
+<div id="bg" style="width: 800px; height: 600px; position: relative; background-image: url(http://thebrown.net/mm/images/conveyer_001.png); background-repeat: no-repeat; background-position: -150px -100px; border: 1px solid lightgray; overflow: hidden">
+  <div class="rules">
+    <table>
+        <tr class="rule">
+            <td><div class="fruit_small bananas"></div></td>
+            <td class="op">+</td>
+            <td><div class="head_small"><div class="face_small sad"></div></div></td>
+            <td class="op">=</td>
+            <td><div class="fruit_small cherries"></div></td>
+            <td class="op">+</td>
+            <td><div class="arrow_small left"></div></td>
+            <td class="op">+</td>
+            <td><div class="head_small"><div class="face_small sad"></div></div></td>
+        </tr>
+    </table>
+  </div>
+  <div id="fruit" class="fruit_large pineapple" style="left: 350px; top: 330px"></div>
+  <div id="monkey" style="width: 300px; height: 480px; position: absolute; left: 320px; top: -120px; background-image: url(http://thebrown.net/mm/images/monkey0.png); background-repeat: no-repeat; background-size: 300px 480px">
+    <div class="face_large silly"></div>
+  </div>
+</div>
+<div id="x" style="display: none">
+<table>
+    <tr>
+        <td><div class="rule_btn"><div class="fruit_med pineapple"></div></div></td>
+        <td class="op">+</td>
+        <td><div class="rule_btn"><div class="head_med"><div class="face_med blank"></div></div></div></td>
+        <td class="op">=</td>
+        <td><div class="rule_btn"><div class="fruit_med bananas"></div></div></td>
+        <td class="op">+</td>
+        <td><div class="rule_btn"><div class="arrow_med right"></div></div></td>
+        <td class="op">+</td>
+        <td><div class="rule_btn"><div class="head_med"><div class="face_med blank"></div></div></div></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
