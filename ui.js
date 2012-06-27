@@ -1,11 +1,7 @@
-$(function() {
-    /**
-     * returns 0, 0.5, or 1
-     */
-    $.easing.triphase = function(t /*, start, end, millis, totalMillis*/) {
-        return Math.floor(t * 2) / 2;
-    };
+window.mm = window.mm || {};
+var mm = window.mm;
 
+$(function() {
     var down = false;
     var attached = false;
 
@@ -30,12 +26,36 @@ $(function() {
 
     $(document.body).click(move);
 
-    function editRule() {
-        var index = $(this).index();
-        $('#x').modal({
-            position: [200, 200]
+    var rules = [
+        ['pineapple', 'blank', 'apples', 'left', 'sad'],
+        ['apples', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad'],
+        ['cherries', 'blank', 'apples', 'left', 'sad']
+    ];
+
+    function drawRules() {
+        mm.drawRules(rules);
+
+        $('.rule').click(function() {
+            var index = $(this).index();
+            mm.editRule(rules[index].slice(), function(rule) {
+                rules[index] = rule;
+                drawRules();
+            });
         });
     }
-
-    $('.rule').click(editRule);
+    drawRules();
 });

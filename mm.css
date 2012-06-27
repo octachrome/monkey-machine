@@ -169,3 +169,17 @@ div {
 .rule_btn > div {
     height: 78px; width: 80px; border-top: 1px solid #fff; border-bottom: 1px solid gray;
 }
+
+* {
+    /*user-select: none;
+    -webkit-user-select: none;*/
+}
+
+.dlg_button {
+    float: right;
+    padding: 5px;
+}
+
+.dlg_button:hover {
+    color: #ccc;
+}
