@@ -42,6 +42,52 @@ $(function() {
         }, 200, flip);
     };
 
+    var swapping = false;
+
+    mm.swap = function(fruit) {
+        if (swapping) {
+            return;
+        }
+        swapping = true;
+
+        function animateHead() {
+            head.animate({
+                top: '-=150'
+            }, 200)
+            .delay(100)
+            .queue(function() {
+                $(this).attr('class', 'fruit_large ' + fruit);
+                $.dequeue(this);
+            })
+            .delay(100)
+            .animate({
+                top: '+=150'
+            }, 200);
+        }
+
+        $('#monkey').animate({
+            top: '+=150'
+        }, 200)
+        .delay(200)
+        .queue(function() {
+            animateHead();
+            $.dequeue(this);
+        })
+        .animate({
+            top: '-=150'
+        }, 200)
+        .delay(200)
+        .animate({
+            top: '+=150'
+        }, 200)
+        .delay(200)
+        .animate({
+            top: '-=150'
+        }, 200, function() {
+            swapping = false;
+        });
+    };
+
     mm.moveTape = function() {
         var oldHead = head;
         $('.fruit_large').animate({

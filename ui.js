@@ -2,7 +2,12 @@ window.mm = window.mm || {};
 var mm = window.mm;
 
 $(function() {
-    $('#monkey').click(mm.move);
+    var tape = ['pineapple', 'apples', 'cherries', 'apples', 'bananas', 'cherries', 'pineapple', 'bananas'];
+
+    $('#monkey').click(function() {
+        var fruit = tape[Math.floor(Math.random() * tape.length)];
+        mm.swap(fruit);
+    });
 
     var rules = [
         ['pineapple', 'blank', 'apples', 'left', 'sad'],
@@ -22,8 +27,6 @@ $(function() {
         });
     }
     drawRules();
-
-    var tape = ['pineapple', 'apples', 'cherries', 'apples', 'bananas', 'cherries', 'pineapple', 'bananas'];
 
     mm.drawTape(tape);
     $('.fruit_large').click(mm.moveTape);
