@@ -1,7 +1,7 @@
-window.mm = window.mm || {};
-var mm = window.mm;
+window.ui = window.ui || {};
+var ui = window.ui;
 
-mm.drawRules = function(rules) {
+ui.drawRules = function(rules) {
     var html = ['<table>'];
     for (var i = 0; i < rules.length; i++) {
         var rule = rules[i];

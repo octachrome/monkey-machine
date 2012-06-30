@@ -1,10 +1,10 @@
-window.mm = window.mm || {};
-var mm = window.mm;
+window.ui = window.ui || {};
+var ui = window.ui;
 
 $(function() {
     var head = null;
 
-    mm.drawTape = function(tape) {
+    ui.drawTape = function(tape) {
         var headPos = 385;
         var html = [];
         for (var i = 0; i < tape.length; i++) {
@@ -20,31 +20,9 @@ $(function() {
         head = $('.tape').children(':first-child');
     };
 
-    var down = false;
-    var attached = false;
-
-    function flip() {
-        if (this.id == 'monkey') {
-            down = !down;
-            if (down) {
-                attached = !attached;
-            }
-        }
-    }
-
-    mm.move = function() {
-        var e = $('#monkey');
-        if (attached) {
-            e = e.add(head);
-        }
-        e.animate({
-            top: down ? '-=150' : '+=150'
-        }, 200, flip);
-    };
-
     var swapping = false;
 
-    mm.swap = function(fruit) {
+    ui.swap = function(fruit, done) {
         if (swapping) {
             return;
         }
@@ -85,16 +63,18 @@ $(function() {
             top: '-=150'
         }, 200, function() {
             swapping = false;
+            done && done();
         });
     };
 
-    mm.moveTape = function() {
+    ui.moveTape = function(direction, done) {
         var oldHead = head;
         $('.fruit_large').animate({
-            left: '-=120'
+            left: direction == 'left' ? '-=120' : '+=120'
         }, 200, function() {
             if (oldHead.is(this)) {
                 head = head.next();
+                done && done();
             }
         });
     };
