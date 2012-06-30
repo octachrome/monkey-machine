@@ -1,6 +1,13 @@
 .fruit_large {
-    width: 200px; height: 200px; position: absolute;
-    background-repeat: no-repeat; background-size: 200px 200px;
+    width: 120px; height: 120px; position: absolute;
+    background-repeat: no-repeat; background-size: 150px 150px;
+    background-position: center center;
+}
+
+.tape {
+    position: absolute;
+    width: 800px;
+    top: 390px;
 }
 
 .fruit_small {
@@ -171,8 +178,8 @@ div {
 }
 
 * {
-    /*user-select: none;
-    -webkit-user-select: none;*/
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .dlg_button {
