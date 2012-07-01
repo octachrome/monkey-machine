@@ -112,7 +112,6 @@
 }
 
 .op  {
-    font-weight: bold;
     font-size: 20pt;
     width: 20px;
     text-align: center;
@@ -142,8 +141,8 @@ table {
 }
 
 .rules {
-    position: absolute; top: 20px; left: 20px;
-    width: 320px; height: 320px;
+    position: absolute; top: 10px; left: 455px;
+    width: 335px; height: 320px;
     overflow-y: auto;
     background: white;
     box-shadow: 0 0 5px 3px #d6d6d6;
@@ -155,7 +154,7 @@ table {
 
 #simplemodal-container {
     background-color: white;
-    width: 500px;
+    width: 520px;
     height: 150px;
     padding: 10px;
     box-shadow: 0 0 5px 3px #888;
@@ -189,4 +188,71 @@ div {
 
 .dlg_button:hover {
     color: #ccc;
+}
+
+#bg {
+    width: 800px; height: 600px; position: relative;
+    background-image: url(http://thebrown.net/mm/images/conveyer.png);
+    background-repeat: no-repeat; background-position: -150px -100px;
+    border: 1px solid lightgray; overflow: hidden;
+}
+
+#monkey {
+    width: 300px; height: 480px; position: absolute;
+    left: 120px; top: -120px;
+    background-image: url(http://thebrown.net/mm/images/monkey0.png);
+    background-repeat: no-repeat; background-size: 300px 480px;
+}
+
+#addrule {
+    height: 40px;
+    text-align: center;
+}
+
+body, p, div, td {
+    font-family: Verdana, sans-serif;
+}
+
+.buttons {
+    position: absolute;
+    width: 62px;
+    height: 233px;
+    left: 10px;
+    top: 10px;
+    background: white;
+    box-shadow: 0 0 5px 3px #d6d6d6;
+}
+
+.buttons div {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background-image: url(http://thebrown.net/mm/images/buttons.png);
+    background-repeat: no-repeat;
+    background-size: 60px 210px;
+    border: 1px solid white;
+}
+
+.buttons div:hover {
+    border: 1px solid gray;
+}
+
+#button_next {
+    background-position: -5px -121px;
+}
+
+#button_undo {
+    background-position: -3px -38px;
+}
+
+#button_reset {
+    background-position: -2px 3px;
+}
+
+#button_go {
+    background-position: -4px -81px;
+}
+
+#button_go.button_stop {
+    background-position: -4px -162px;
 }

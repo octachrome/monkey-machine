@@ -5,6 +5,13 @@ window.ui = window.ui || {};
 var ui = window.ui;
 
 $(function() {
+    function reset() {
+        mm.reset();
+        ui.drawFace(mm.face());
+        ui.drawTape(mm.tape());
+    }
+    reset();
+
     function drawRules() {
         ui.drawRules(mm.rules());
 
@@ -13,24 +20,68 @@ $(function() {
             ui.editRule(mm.rule(index), function(rule) {
                 mm.updateRule(index, rule);
                 drawRules();
+            }, function(rule) {
+                mm.deleteRule(index);
+                drawRules();
             });
         });
     }
     drawRules();
 
-    ui.drawTape(mm.tape());
-    $('.fruit_large').click(ui.moveTape);
-
-    function next() {
+    function step(done) {
         var result = mm.next();
         if (result) {
             ui.swap(result.fruit, function() {
-                ui.moveTape(result.move);
+                ui.drawFace(result.face);
+                ui.moveTape(result.move, function() {
+                    done && done(true);
+                });
             });
         } else {
-            alert('No matching rule');
+            done && done(false);
         }
     }
 
-    $('#monkey').click(next);
+    var running = false;
+    var stop = false;
+
+    function next() {
+        if (running) {
+            return;
+        }
+        running = true;
+        step(function(matched) {
+            running = false;
+            if (!matched) {
+                alert('No matching rule');
+            }
+        });
+    }
+
+    function toggleRun() {
+        $('#button_go').toggleClass('button_stop');
+        if (running) {
+            stop = !stop;
+            return;
+        }
+        running = true;
+        stop = false;
+        function s() {
+            step(function(matched) {
+                if (!matched) {
+                    running = false;
+                    $('#button_go').removeClass('button_stop');
+                } else if (!stop) {
+                    s();
+                } else {
+                    running = false;
+                }
+            });
+        }
+        s();
+    }
+
+    $('#button_next').click(next);
+    $('#button_reset').click(reset);
+    $('#button_go').click(toggleRun);
 });

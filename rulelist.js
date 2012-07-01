@@ -27,6 +27,8 @@ ui.drawRules = function(rules) {
         html[html.length] = '"></div></div></td>';
         html[html.length] = '</tr>';
     }
+    html[html.length] = '<tr class="rule"><td id="addrule" colspan="9">Add</td>';
+    html[html.length] = '</tr>';
     html[html.length] = '</table>';
     $('.rules').html(html.join(''));
 };

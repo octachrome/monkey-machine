@@ -12,7 +12,7 @@ $(function() {
         {cls: 'arrow_med', options: mm.ARROWS},
         {cls: 'face_med', options: mm.FACES}];
 
-    ui.editRule = function(rule, onSave) {
+    ui.editRule = function(rule, onSave, onDelete) {
         var html = ['<table><tr>'];
         for (var i = 0; i < buttons.length; i++) {
             if (i == 2) {
@@ -36,10 +36,12 @@ $(function() {
             html[html.length] = '</div></td>';
         }
         html[html.length] = '</tr></table>';
-        html[html.length] = '<div class="dlg_button simplemodal-close">Cancel</div><div id="save_rule" class="dlg_button">Save</div>';
+        html[html.length] = '<div class="dlg_button simplemodal-close">Cancel</div>';
+        html[html.length] = '<div id="delete_rule" class="dlg_button">Delete</div>';
+        html[html.length] = '<div id="save_rule" class="dlg_button">Save</div>';
     
         $.modal(html.join(''), {
-            position: [200, 150],
+            position: [200, 140],
             onShow: function(dialog) {
                 $('.rule_btn').click(function() {
                     var el = $(this);
@@ -49,13 +51,17 @@ $(function() {
                     var oldIndex = options.indexOf(oldOption);
                     var newIndex = (oldIndex + 1) % options.length;
                     var newOption = options[newIndex];
-                    var d = el.find('.' + oldOption);
+                    var d = el.find('div').last();
                     d.removeClass(oldOption).addClass(newOption);
                     rule[i] = newOption;
                     return false;
                 });
                 $('#save_rule').click(function() {
                     onSave(rule);
+                    $.modal.close();
+                });
+                $('#delete_rule').click(function() {
+                    onDelete(rule);
                     $.modal.close();
                 });
             }

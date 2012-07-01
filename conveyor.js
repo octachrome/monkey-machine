@@ -5,7 +5,7 @@ $(function() {
     var head = null;
 
     ui.drawTape = function(tape) {
-        var headPos = 385;
+        var headPos = 185;
         var html = [];
         for (var i = 0; i < tape.length; i++) {
             var fruit = tape[i];
@@ -20,14 +20,7 @@ $(function() {
         head = $('.tape').children(':first-child');
     };
 
-    var swapping = false;
-
     ui.swap = function(fruit, done) {
-        if (swapping) {
-            return;
-        }
-        swapping = true;
-
         function animateHead() {
             head.animate({
                 top: '-=150'
@@ -62,7 +55,6 @@ $(function() {
         .animate({
             top: '-=150'
         }, 200, function() {
-            swapping = false;
             done && done();
         });
     };
@@ -73,9 +65,13 @@ $(function() {
             left: direction == 'left' ? '-=120' : '+=120'
         }, 200, function() {
             if (oldHead.is(this)) {
-                head = head.next();
+                head = direction == 'left' ? head.next() : head.prev();
                 done && done();
             }
         });
+    };
+
+    ui.drawFace = function(face) {
+        $('.face_large').attr('class', 'face_large ' + face);
     };
 });
