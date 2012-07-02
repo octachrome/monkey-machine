@@ -49,7 +49,8 @@ $(function() {
                 return {
                     fruit: rule[2],
                     move: rule[3],
-                    face: rule[4]
+                    face: rule[4],
+                    rule: i
                 };
             }
         }

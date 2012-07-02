@@ -31,6 +31,7 @@ $(function() {
     function step(done) {
         var result = mm.next();
         if (result) {
+            ui.highlightRule(result.rule);
             ui.swap(result.fruit, function() {
                 ui.drawFace(result.face);
                 ui.moveTape(result.move, function() {

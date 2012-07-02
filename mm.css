@@ -137,7 +137,11 @@ table {
 }
 
 .rule:hover {
-    background: #ffe066;
+    background: #ff8;
+}
+
+.active {
+    background: #cfb;
 }
 
 .rules {
@@ -255,4 +259,37 @@ body, p, div, td {
 
 #button_go.button_stop {
     background-position: -4px -162px;
+}
+
+#menu {
+    width: 800px; height: 600px; position: relative;
+    border: 1px solid lightgray; overflow: hidden;
+    background-image: url(http://thebrown.net/mm/images/conveyer.png);
+    background-repeat: no-repeat;
+    background-position: -40px -240px;
+    background-size: 800px 600px;
+    border: 1px solid lightgray; overflow: hidden;
+}
+
+#menu div {
+    text-align: center;
+}
+
+.title {
+    padding: 20px; font-size: 30pt;
+}
+
+.menuTape {
+    position: relative; top: 20px;
+}
+
+.play {
+    margin: 400px auto 0;
+    width: 100px;
+    text-align: center; font-weight: bold; font-size: 25pt;
+}
+
+.play:hover {
+    color: red;
+    cursor: pointer;
 }
