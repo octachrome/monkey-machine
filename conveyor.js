@@ -4,12 +4,13 @@ var ui = window.ui;
 $(function() {
     var head = null;
 
-    ui.drawTape = function(tape) {
+    ui.drawTape = function(tape, h) {
+        h = h || 0;
         var headPos = 185;
         var html = [];
         for (var i = 0; i < tape.length; i++) {
             var fruit = tape[i];
-            var left = headPos + i * 120;
+            var left = headPos + (i - h) * 120;
             html[html.length] = '<div class="fruit_large ';
             html[html.length] = fruit;
             html[html.length] = '" style="left: ';
@@ -17,7 +18,7 @@ $(function() {
             html[html.length] = 'px"></div>';
         }
         $('.tape').html(html.join(''));
-        head = $('.tape').children(':first-child');
+        head = $('.tape').children().eq(h);
     };
 
     ui.swap = function(fruit, done) {

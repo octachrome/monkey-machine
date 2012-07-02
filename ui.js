@@ -81,7 +81,15 @@ $(function() {
         s();
     }
 
+    function undo() {
+        mm.undo();
+        drawRules();
+        ui.drawFace(mm.face());
+        ui.drawTape(mm.tape(), mm.head());
+    }
+
     $('#button_next').click(next);
+    $('#button_undo').click(undo);
     $('#button_reset').click(reset);
     $('#button_go').click(toggleRun);
 });

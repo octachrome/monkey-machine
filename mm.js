@@ -17,16 +17,27 @@ $(function() {
     var head;
     var face;
 
+    var undo = [];
+
     mm.next = function() {
         var fruit = tape[head];
         var result = mm.evalRule(fruit);
         if (result) {
+            var oldFace = face;
+            var oldHead = head;
             tape[head] = result.fruit;
             face = result.face;
             head += result.move == 'left' ? 1 : -1;
             if (head < 0) {
                 tape.splice(0, 0, [null]);
+                head++;
+                oldHead++;
             }
+            undo[undo.length] = function() {
+                face = oldFace;
+                head = oldHead;
+                tape[oldHead] = fruit;
+            };
         }
         return result;
     };
@@ -55,10 +66,23 @@ $(function() {
     };
 
     mm.deleteRule = function(index) {
-        rules.splice(index, 1);
+        var oldRule = rules.splice(index, 1)[0];
+        undo[undo.length] = function() {
+            rules.splice(index, 0, oldRule);
+        };
     };
 
     mm.updateRule = function(index, rule) {
+        var oldRule = rules[index];
+        if (oldRule) {
+            undo[undo.length] = function() {
+                rules[index] = oldRule;
+            };
+        } else {
+            undo[undo.length] = function() {
+                rules.splice(index, 1);
+            };
+        }
         rules[index] = rule;
     };
 
@@ -67,6 +91,16 @@ $(function() {
     };
 
     mm.reset = function() {
+        if (tape) {
+            var oldTape = tape.slice();
+            var oldHead = head;
+            var oldFace = face;
+            undo[undo.length] = function() {
+                tape = oldTape;
+                head = oldHead;
+                face = oldFace;
+            };
+        }
         tape = ['pineapple', 'apples', 'cherries', 'apples', 'bananas', 'cherries', 'pineapple', 'bananas'];
         head = 0;
         face = 'blank';
@@ -74,5 +108,13 @@ $(function() {
 
     mm.face = function() {
         return face;
+    };
+
+    mm.head = function() {
+        return head;
+    };
+
+    mm.undo = function() {
+        undo.pop()();
     };
 });
