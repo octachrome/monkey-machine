@@ -198,7 +198,7 @@ div {
     width: 800px; height: 600px; position: relative;
     background-image: url(http://thebrown.net/mm/images/conveyer.png);
     background-repeat: no-repeat; background-position: -150px -100px;
-    border: 1px solid lightgray; overflow: hidden;
+    overflow: hidden;
 }
 
 #monkey {
@@ -220,7 +220,7 @@ body, p, div, td {
 .buttons {
     position: absolute;
     width: 62px;
-    height: 233px;
+    height: 290px;
     left: 10px;
     top: 10px;
     background: white;
@@ -229,16 +229,16 @@ body, p, div, td {
 
 .buttons div {
     width: 50px;
-    height: 50px;
+    height: 35px;
     margin: 5px;
-    background-image: url(http://thebrown.net/mm/images/buttons.png);
     background-repeat: no-repeat;
     background-size: 60px 210px;
     border: 1px solid white;
-}
-
-.buttons div:hover {
-    border: 1px solid gray;
+    text-align: center;
+    padding-top: 15px;
+    overflow: hidden;
+    /*text-indent: -200px;*/
+    /*background-image: url(http://thebrown.net/mm/images/buttons.png);*/
 }
 
 #button_next {
@@ -261,14 +261,26 @@ body, p, div, td {
     background-position: -4px -162px;
 }
 
+.buttons div:hover {
+    border: 1px solid gray;
+}
+
+
 #menu {
     width: 800px; height: 600px; position: relative;
-    border: 1px solid lightgray; overflow: hidden;
     background-image: url(http://thebrown.net/mm/images/conveyer.png);
     background-repeat: no-repeat;
     background-position: -40px -240px;
     background-size: 800px 600px;
+}
+
+#wnd {
+    width: 800px; height: 600px; position: relative;
     border: 1px solid lightgray; overflow: hidden;
+}
+
+#scroll {
+    width: 800px; height: 1200px; position: relative;
 }
 
 #menu div {

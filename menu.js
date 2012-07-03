@@ -2,13 +2,17 @@ window.ui = window.ui || {};
 var ui = window.ui;
 
 $(function() {
-    var puzzle = {
+    var puzzles = [{
         title: "APPLE UPGRADE",
-        desc: "Swap all the apples for pineapples",
-        tape: ['bananas', 'apples', 'cherries', 'apples', 'apples', 'bananas', 'cherries']
-    };
+        desc: "Swap all the apples for pineapples.",
+        tape: ['bananas', 'apples', 'cherries', 'apples', 'apples', 'bananas', 'cherries'],
+        goal: ['bananas', 'pineapple', 'cherries', 'pineapple', 'pineapple', 'bananas', 'cherries']
+    }];
 
-    ui.drawMenu = function(puzzle) {
+    var current = 0;
+
+    ui.drawMenu = function() {
+        var puzzle = puzzles[current];
         $('.title').html(puzzle.title);
         $('.desc').html(puzzle.desc);
         var html = [];
@@ -22,7 +26,12 @@ $(function() {
             html[html.length] = 'px"></div>';
         }
         $('.menuTape').html(html.join(''));
+        $('#scroll').animate({top: 0}, 200);
     };
 
-    ui.drawMenu(puzzle);
+    $('.play').click(function() {
+        ui.drawPuzzle(puzzles[current]);
+    });
+
+    ui.drawMenu();
 });

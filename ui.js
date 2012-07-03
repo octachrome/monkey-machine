@@ -8,9 +8,8 @@ $(function() {
     function reset() {
         mm.reset();
         ui.drawFace(mm.face());
-        ui.drawTape(mm.tape());
+        ui.drawTape(mm.tape(), mm.head());
     }
-    reset();
 
     function drawRules() {
         ui.drawRules(mm.rules());
@@ -26,7 +25,6 @@ $(function() {
             });
         });
     }
-    drawRules();
 
     function step(done) {
         var result = mm.next();
@@ -35,7 +33,11 @@ $(function() {
             ui.swap(result.fruit, function() {
                 ui.drawFace(result.face);
                 ui.moveTape(result.move, function() {
-                    done && done(true);
+                    if (mm.won()) {
+                        alert('WIN!');                    
+                    } else {
+                        done && done(true);
+                    }
                 });
             });
         } else {
@@ -62,16 +64,18 @@ $(function() {
     function toggleRun() {
         $('#button_go').toggleClass('button_stop');
         if (running) {
+            $('#button_go').html(stop ? 'STOP' : 'GO!');
             stop = !stop;
             return;
         }
+        $('#button_go').html('STOP');
         running = true;
         stop = false;
         function s() {
             step(function(matched) {
                 if (!matched) {
                     running = false;
-                    $('#button_go').removeClass('button_stop');
+                    $('#button_go').removeClass('button_stop').html('GO!');
                 } else if (!stop) {
                     s();
                 } else {
@@ -89,8 +93,19 @@ $(function() {
         ui.drawTape(mm.tape(), mm.head());
     }
 
+    ui.drawPuzzle = function(puzzle) {
+        running = false;
+        stop = false;
+        mm.load(puzzle);
+        ui.drawFace(mm.face());
+        ui.drawTape(mm.tape(), mm.head());
+        drawRules();
+        $('#scroll').animate({top: -600}, 200);
+    };
+
     $('#button_next').click(next);
     $('#button_undo').click(undo);
     $('#button_reset').click(reset);
     $('#button_go').click(toggleRun);
+    $('#button_menu').click(ui.drawMenu);
 });

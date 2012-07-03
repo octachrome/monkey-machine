@@ -6,18 +6,26 @@ mm.FACES = ['blank', 'sad', 'angry', 'silly'];
 mm.ARROWS = ['left', 'right'];
 
 $(function() {
-    var rules = [
-        ['pineapple', 'blank', 'pineapple', 'left', 'sad'],
-        ['apples', 'sad', 'apples', 'right', 'blank']
-    ];
-
     var defaultRule = ['pineapple', 'blank', 'pineapple', 'left', 'blank'];
+    var rules = [defaultRule];
 
     var tape;
     var head;
     var face;
 
-    var undo = [];
+    var undo;
+
+    var activePuzzle;
+
+    mm.load = function(puzzle) {
+        if (activePuzzle != puzzle) {
+            activePuzzle = puzzle;
+            tape = activePuzzle.tape.slice();
+            head = 0;
+            face = 'blank';
+            undo = [];
+        }
+    };
 
     mm.next = function() {
         var fruit = tape[head];
@@ -102,7 +110,7 @@ $(function() {
                 face = oldFace;
             };
         }
-        tape = ['pineapple', 'apples', 'cherries', 'apples', 'bananas', 'cherries', 'pineapple', 'bananas'];
+        tape = activePuzzle.tape.slice();
         head = 0;
         face = 'blank';
     };
@@ -116,6 +124,39 @@ $(function() {
     };
 
     mm.undo = function() {
-        undo.pop()();
+        var f = undo.pop();
+        f && f();
+    };
+
+    function arrayMatch(a1, a2) {
+        for (var start1 = 0; start1 < a1.length; start1++) {
+            if (a1[start1] != null) {
+                break;
+            }
+        }
+        for (var start2 = 0; start2 < a2.length; start2++) {
+            if (a2[start2] != null) {
+                break;
+            }
+        }
+        for (var i = 0; i < a1.length; i++) {
+            if (a1[start1 + i] != a2[start2 + i]) {
+                return false;
+            }
+        }
+        for (; i < a2.length; i++) {
+            if (a2[start2 + i] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    if (window._dbg) {
+        window._dbg.arrayMatch = arrayMatch;
+    }
+
+    mm.won = function() {
+        return arrayMatch(tape, activePuzzle.goal);
     };
 });
