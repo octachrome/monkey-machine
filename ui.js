@@ -26,6 +26,18 @@ $(function() {
         });
     }
 
+    function win() {
+        $.modal('<div class="win">WIN!</div><div class="win_next">NEXT PUZZLE</div>', {
+            position: [150, 300],
+            onShow: function(dialog) {
+                $('.win_next').click(function() {
+                    $.modal.close();
+                    ui.nextPuzzle();
+                });
+            }
+        });
+    }
+
     function step(done) {
         var result = mm.next();
         if (result) {
@@ -34,7 +46,7 @@ $(function() {
                 ui.drawFace(result.face);
                 ui.moveTape(result.move, function() {
                     if (mm.won()) {
-                        alert('WIN!');                    
+                        win();
                     } else {
                         done && done(true);
                     }
@@ -96,6 +108,7 @@ $(function() {
     ui.drawPuzzle = function(puzzle) {
         running = false;
         stop = false;
+        $('#button_go').removeClass('button_stop').html('GO!');
         mm.load(puzzle);
         ui.drawFace(mm.face());
         ui.drawTape(mm.tape(), mm.head());

@@ -66,7 +66,18 @@ $(function() {
             left: direction == 'left' ? '-=120' : '+=120'
         }, 200, function() {
             if (oldHead.is(this)) {
-                head = direction == 'left' ? head.next() : head.prev();
+                var newHead = direction == 'left' ? head.next() : head.prev();
+                if (newHead.length) {
+                    head = newHead;
+                } else {
+                    var html = '<div class="fruit_large" style="left: 185px"></div>';
+                    if (direction == 'left') {
+                        head.parent().append(html);
+                    } else {
+                        head.parent().prepend(html);
+                    }
+                    head = direction == 'left' ? head.next() : head.prev();
+                }
                 done && done();
             }
         });

@@ -83,6 +83,8 @@ $(function() {
     
         $.modal(html.join(''), {
             position: [200, 140],
+            minWidth: 520,
+            minHeight: 150,
             onShow: function(dialog) {
                 $('.rule_btn').click(function() {
                     var el = $(this);
@@ -95,7 +97,6 @@ $(function() {
                     var d = el.find('div').last();
                     d.removeClass(oldOption).addClass(newOption);
                     rule[i] = newOption;
-                    return false;
                 });
                 $('#save_rule').click(function() {
                     onSave(rule);

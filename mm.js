@@ -7,14 +7,12 @@ mm.ARROWS = ['left', 'right'];
 
 $(function() {
     var defaultRule = ['pineapple', 'blank', 'pineapple', 'left', 'blank'];
-    var rules = [defaultRule];
 
+    var rules;
     var tape;
     var head;
     var face;
-
     var undo;
-
     var activePuzzle;
 
     mm.load = function(puzzle) {
@@ -24,11 +22,12 @@ $(function() {
             head = 0;
             face = 'blank';
             undo = [];
+            rules = [defaultRule];
         }
     };
 
     mm.next = function() {
-        var fruit = tape[head];
+        var fruit = tape[head] || '';
         var result = mm.evalRule(fruit);
         if (result) {
             var oldFace = face;
@@ -130,22 +129,22 @@ $(function() {
 
     function arrayMatch(a1, a2) {
         for (var start1 = 0; start1 < a1.length; start1++) {
-            if (a1[start1] != null) {
+            if (a1[start1]) {
                 break;
             }
         }
         for (var start2 = 0; start2 < a2.length; start2++) {
-            if (a2[start2] != null) {
+            if (a2[start2]) {
                 break;
             }
         }
         for (var i = 0; i < a1.length; i++) {
-            if (a1[start1 + i] != a2[start2 + i]) {
+            if ((a1[start1 + i] || '') != (a2[start2 + i] || '')) {
                 return false;
             }
         }
         for (; i < a2.length; i++) {
-            if (a2[start2 + i] != null) {
+            if (a2[start2 + i]) {
                 return false;
             }
         }

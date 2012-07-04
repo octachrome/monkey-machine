@@ -158,8 +158,6 @@ table {
 
 #simplemodal-container {
     background-color: white;
-    width: 520px;
-    height: 150px;
     padding: 10px;
     box-shadow: 0 0 5px 3px #888;
 }
@@ -183,6 +181,7 @@ div {
 * {
     user-select: none;
     -webkit-user-select: none;
+    cursor: default;
 }
 
 .dlg_button {
@@ -292,16 +291,52 @@ body, p, div, td {
 }
 
 .menuTape {
-    position: relative; top: 20px;
+    position: absolute; top: 140px;
 }
 
-.play {
-    margin: 400px auto 0;
+#play {
     width: 100px;
+    margin: auto auto;
+    color: gray;
+}
+
+#prev_puzzle, #next_puzzle {
+    width: 50px;
+    margin: auto auto;
+    color: gray;
+}
+
+#play.enabled, #prev_puzzle.enabled, #next_puzzle.enabled {
+    color: black;
+}
+
+#play.enabled:hover, #prev_puzzle.enabled:hover, #next_puzzle.enabled:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.puzzle_btns {
+    position: absolute;
+    top: 500px;
     text-align: center; font-weight: bold; font-size: 25pt;
 }
 
-.play:hover {
+.win {
+    margin: 20px;
+    font-size: 30pt;
+    font-weight: bold;
+    width: 200px;
+    text-align: center;
+}
+
+.win_next {
+    margin: 20px;
+    text-align: center;
+    font-size: 15pt;
+    font-weight: bold;
+}
+
+.win_next:hover {
     color: red;
     cursor: pointer;
 }
